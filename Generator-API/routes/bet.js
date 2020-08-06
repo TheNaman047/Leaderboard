@@ -9,13 +9,13 @@ const { betCalculator } = require('../helpers/util')
 
 router.get('/', (req, res) => {
 
-    const { user, gameId } = req.query
-    let betAmount = +req.query.betAmount
+    /* const { user, gameId } = req.query
+    let betAmount = +req.query.betAmount */
 
     // For load testing
-    /*  const user = "naman"
+     const user = "naman"
      const gameId = "1"
-     const betAmount = 450 */
+     const betAmount = 450
 
     // Validating input
     if (!user || !gameId || !betAmount) {

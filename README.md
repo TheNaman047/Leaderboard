@@ -33,5 +33,5 @@ Generator-API node server pushes generated data to RabbitMQ. It calculates the t
 ## Load Testing
 
 Load testing for Generator-API is done using "autocannon" npm package.
-Test command: `` autocannon -c200 -p100 localhost:3001/api/bet ``
+Test command: `` autocannon -c200 -p120 -d20 localhost:3001/api/bet ``
 Node run command: `` npm run clustered ``
