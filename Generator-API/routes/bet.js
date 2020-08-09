@@ -3,9 +3,10 @@
  * generated payload to rabbitmq to be processed further
  */
 
-const router = require('express').Router()
-const rabbitMQHelper = require('../helpers/rabbitmq')
-const { betCalculator } = require('../helpers/util')
+const router = require('express').Router(),
+    rabbitMQHelper = require('../helpers/rabbitmqProducer'),
+    { betCalculator } = require('../helpers/util'),
+    randomWords = require('random-words')
 
 router.get('/', (req, res) => {
 
@@ -13,9 +14,9 @@ router.get('/', (req, res) => {
     let betAmount = +req.query.betAmount */
 
     // For load testing
-     const user = "naman"
-     const gameId = "1"
-     const betAmount = 450
+    const user = randomWords()
+    const gameId = "1"
+    const betAmount = Math.floor(Math.random() * 1000)
 
     // Validating input
     if (!user || !gameId || !betAmount) {

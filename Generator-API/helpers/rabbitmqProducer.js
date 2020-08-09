@@ -1,7 +1,7 @@
 /**
  * @abstract Helper function. Sends payload to job queue via amqp channel
  */
-const amqpChannel = require('./channel')
+const amqpChannel = require('./getCannelHelper')
 
 module.exports = async (data) => {
 

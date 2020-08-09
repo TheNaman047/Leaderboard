@@ -1,18 +1,18 @@
 /* Calculates win amount based on bet amount */
 exports.betCalculator = (betAmount) => {
 
-    let transactionId = this.getRandomValue(6, 'aA#')
+    let transactionId = this.getRandomValue(6, 'aA#'),
+        winAmount = 0
 
-    let winAmount = 0
-
-    const randomValue = Math.random()
-    const winCriteria = (randomValue * 1000)
-
-    // console.log(winCriteria);
+    const randomValue = Math.random(),
+        winCriteria = (randomValue * 1000)
 
     if (betAmount > winCriteria) {
-        winAmount += randomValue > 0.5 ? (betAmount + (winCriteria / 10)) : (betAmount - (winCriteria / 10))
+        winAmount = randomValue > 0.5
+            ? (betAmount + (winCriteria / 10)) : (betAmount - (winCriteria / 10))
+        winAmount = parseFloat(winAmount.toFixed(3))
     }
+
     return { transactionId, winAmount }
 }
 
