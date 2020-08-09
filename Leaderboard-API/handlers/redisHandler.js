@@ -3,6 +3,10 @@ const redis = require('redis'),
 
 let redisClient = null
 
+process.on('exit', () => {
+    redisClient ? redisClient.quit() : null
+})
+
 module.exports = {
     init: () => {
 

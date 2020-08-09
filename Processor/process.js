@@ -9,7 +9,7 @@ const rabbitMQConsumer = require('./helpers/rabbitmqConsumer'),
 
 redisClient.on('ready', () => {
 
-    console.log("Connected to Redis");
+    console.log("Connected to Redis")
     // Reading messages from rabbitmq
     rabbitMQConsumer.getMessages(payload => {
 
@@ -35,6 +35,10 @@ redisClient.on('ready', () => {
 })
 
 redisClient.on('error', (error) => {
-    console.error('error', error);
+    console.error('error', error)
     process.exit()
+})
+
+process.on('exit', () => {
+    redisClient ? redisClient.quit() : null
 })
