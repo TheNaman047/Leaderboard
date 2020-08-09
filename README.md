@@ -56,4 +56,4 @@ Load testing for Generator-API is done using "autocannon" npm package.
 Load testing for Generator-API is done using "autocannon" npm package.
     - Node run command: `` npm run clustered ``
     - Test command: `` autocannon -c200 -p120 -d20 localhost:4001/api/leaderboard/getStats?user=naman ``
-    - Results were close to 6k request/sec avg. without randomWords package.
+    - Results were close to 6k request/sec avg.
