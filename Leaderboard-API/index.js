@@ -21,7 +21,7 @@ if (doCluster && cluster.isMaster) {
     }
 } else {
     initRedis()
-    initServer(doCluster ? serverConfig.clustered_port : serverConfig.port)
+    initServer()
 }
 
 function initRedis() {
@@ -31,7 +31,7 @@ function initRedis() {
     require('./cron/dumpDataJob')
 }
 
-function initServer(port) {
+function initServer() {
 
     // Connect to mongoose
     mongoose.connect(`mongodb://${mongoConfig.host}:${mongoConfig.port}/${mongoConfig.db}`, {
@@ -52,5 +52,5 @@ function initServer(port) {
     app.use('/api/leaderboard', leaderboardRoute)
 
     // Starting Server
-    app.listen(port, () => console.log("Server is up and running on http://localhost:" + port))
+    app.listen(serverConfig.port, () => console.log("Server is up and running on http://localhost:" + serverConfig.port))
 }

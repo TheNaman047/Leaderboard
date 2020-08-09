@@ -10,20 +10,16 @@ const cluster = require('cluster'),
 const cliArgs = process.argv.slice(2),
     doCluster = cliArgs[0] === "--clustered" ? true : false
 
-if (doCluster) {
-    if (cluster.isMaster) {
-        for (var i = 0; i < numCPUs; i++) {
-            cluster.fork();
-        }
-    }
-    else {
-        initServer(config.clustered_port)
+if (doCluster && cluster.isMaster) {
+
+    for (var i = 0; i < numCPUs; i++) {
+        cluster.fork();
     }
 } else {
-    initServer(config.port)
+    initServer()
 }
 
-function initServer(port) {
+function initServer() {
 
     // Routes
     const bet = require('./routes/bet')
@@ -32,5 +28,5 @@ function initServer(port) {
     app.use('/api/bet', bet)
 
     // Starting Server
-    app.listen(port, () => console.log("Server is up and running on http://localhost:" + port))
+    app.listen(config.port, () => console.log("Server is up and running on http://localhost:" + config.port))
 }

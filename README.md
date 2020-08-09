@@ -26,7 +26,7 @@ Choose your preferred set of components like database, cache mechanism & and how
 Three node servers are created for 3 different purposes as explained below
 
 1. Generator-API: Contains a single api which calculates the win amount based on betamount. Please note the following points of this server.
-    - Can run a single instance using `` npm start `` or in cluster mode using `` npm run clustered ``. Runs on `` 3000 `` and `` 3001 `` port respectively. Can be changed in `` configs\server.js ``.
+    - Can run a single instance using `` npm start `` or in cluster mode using `` npm run clustered ``. Runs on `` 3000 `` port. Can be changed in `` configs\server.js ``.
     - Currently the `` /api/bet/ `` does not take any input and generates input data on its own. To do that `` randomWords `` npm package is used for names and `` Math.random() `` is used for betAmount. This can be changed in `` routes\bet.js `` file as randomWords might have performace implications.
     - Message queue name `` jobs `` is used for rabbitmq and it's connection config is present in `` configs\rabbitmq.js ``.
 
@@ -38,7 +38,7 @@ Three node servers are created for 3 different purposes as explained below
     - Server can be started using `` npm start `` cmd.
 
 3. Leaderboard-API: Contains `` Leaderboard Stats API `` and `` Weekly Data Dump `` cron job. More details are below.
-    - Can run a single instance using `` npm start `` or in cluster mode using `` npm run clustered ``. Runs on `` 4000 `` and `` 4001 `` port respectively. Can be changed in `` configs\server.js ``.
+    - Can run a single instance using `` npm start `` or in cluster mode using `` npm run clustered ``. Runs on `` 4000 `` port. Can be changed in `` configs\server.js ``.
     - API to access leaderboard stats is `` /api/leaderboard/getStats `` as a `` GET `` method. Query parameter `` ?user={userName} `` is mandatory. Optional parameters include 
         - `` offset=5 ``, defaults to ``10``. Till which rank to load stats.
         - `` gameId=1 ``, defaults to ``1``. Load data of specific game id
@@ -50,10 +50,10 @@ Three node servers are created for 3 different purposes as explained below
 
 Load testing for Generator-API is done using "autocannon" npm package.
     - Node run command: `` npm run clustered ``
-    - Test command: `` autocannon -c200 -p120 -d20 localhost:3001/api/bet ``
+    - Test command: `` autocannon -c200 -p120 -d20 localhost:3000/api/bet ``
     - Results were close to 10k request/sec without randomWords package.
 
 Load testing for Generator-API is done using "autocannon" npm package.
     - Node run command: `` npm run clustered ``
-    - Test command: `` autocannon -c200 -p120 -d20 localhost:4001/api/leaderboard/getStats?user=naman ``
+    - Test command: `` autocannon -c200 -p120 -d20 localhost:4000/api/leaderboard/getStats?user=naman ``
     - Results were close to 6k request/sec avg.
